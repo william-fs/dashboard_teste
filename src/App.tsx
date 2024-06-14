@@ -1,10 +1,12 @@
 import './App.css'
+import ComboBox from './components/ComboBox/ComboBox'
 
 function App() {
 
   return (
     <>
-    <h1>App</h1>
+      <h1>Dasboard</h1>
+      <ComboBox />
     </>
   )
 }
