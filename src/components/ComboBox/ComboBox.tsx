@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './ComboBox.css';
+import "./ComboBox.css";
 
 // Importação componente dos dados 
 import Dados1 from '../Dados1/Dados1';
@@ -44,7 +44,7 @@ function ComboBox() {
 
     return(
         <div className="comboBox">
-            <select value={selecao} onChange={((e) => escolhaDados(e.target.value))}>
+            <select value={selecao} onChange={((e) => escolhaDados(e.target.value))} className={"form-select"}>
                 <option value="nulo">-</option>
                 <option value="dados1">Fonte de Dados 1</option>
                 <option value="dados2">Fonte de Dados 2</option>

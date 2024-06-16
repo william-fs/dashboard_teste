@@ -1,0 +1,11 @@
+.comboBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.comboBox select {
+    width: 200px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
