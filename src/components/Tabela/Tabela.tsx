@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import './Tabela2Campos.css';
+import './Tabela.css';
 
 interface table {
     titleTable: string | ReactNode;
@@ -7,7 +7,7 @@ interface table {
     totalTable: string | number | ReactNode;
 }
 
-function Tabela2Campos({titleTable, contentTable, totalTable}:table) {
+function Tabela({titleTable, contentTable, totalTable}:table) {
     return(
         <table className="table table-bordered myTable">
             <thead>
@@ -20,4 +20,4 @@ function Tabela2Campos({titleTable, contentTable, totalTable}:table) {
         </table>
     )
 }
-export default Tabela2Campos;
+export default Tabela;
