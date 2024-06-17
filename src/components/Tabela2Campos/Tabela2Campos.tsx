@@ -1,0 +1,23 @@
+import { ReactNode } from 'react';
+import './Tabela2Campos.css';
+
+interface table {
+    titleTable: string | ReactNode;
+    contentTable: string | ReactNode;
+    totalTable: string | number | ReactNode;
+}
+
+function Tabela2Campos({titleTable, contentTable, totalTable}:table) {
+    return(
+        <table className="table table-bordered myTable">
+            <thead>
+                {titleTable}
+            </thead>
+            <tbody>
+                {contentTable}
+                {totalTable} 
+            </tbody>
+        </table>
+    )
+}
+export default Tabela2Campos;
