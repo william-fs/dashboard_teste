@@ -164,3 +164,56 @@ export {somarPrecoMesJan, somarPrecoMesFev, somarPrecoMesMar, somarPrecoMesAbr, 
 export {somarQuantidadeMesJan, somarQuantidadeMesFev, somarQuantidadeMesMar, somarQuantidadeMesAbr, somarQuantidadeMesMai, somarQuantidadeMesJun, somarQuantidadeMesJul, somarQuantidadeMesAgo, somarQuantidadeMesSet, somarQuantidadeMesOut};
 
 
+
+interface FiltroGraf3 {
+    name: string;
+    data: number[];
+}
+
+function FiltroGrafico3(data: any[], grupo: string, preencher: string, valorCampo: string): FiltroGraf3[] {
+    const agrupamento: { [key: string]: { [key: string]: number } } = {};
+    const preencherValor: Set<string> = new Set();
+
+// Coleta todos os valores únicos da chave preencher
+data.forEach(item => {
+    preencherValor.add(item[preencher]);
+});
+
+// Mapeia os valores de preencher para os índices
+const preencherLista = Array.from(preencherValor);
+const preencherIndexMap: { [key: string]: number } = {};
+preencherLista.forEach((value, index) => {
+    preencherIndexMap[value] = index;
+});
+
+// Inicializa dados de cada grupo com 0.00 para todos os valores preencher e popula com os preços ou quantidades
+data.forEach(item => {
+    const grupoKey = item[grupo].toString();
+    const PreenchimentoKey = item[preencher].toString();
+
+    if (!agrupamento[grupoKey]) {
+    agrupamento[grupoKey] = {};
+    preencherLista.forEach(value => {
+        agrupamento[grupoKey][value] = 0.00;
+    });
+    }
+    agrupamento[grupoKey][PreenchimentoKey] += item[valorCampo];
+});
+
+// Converte os dados para o formato Series[] e garante duas casas decimais
+const result: Series[] = Object.keys(agrupamento).map(grupoKey => {
+    return {
+    name: grupoKey,
+    data: preencherLista.map(PreenchimentoKey => parseFloat(agrupamento[grupoKey][PreenchimentoKey].toFixed(2)))
+    };
+});
+
+return result;
+}
+
+// Exemplos de uso
+// const resultadoFiltro = FiltroGrafico3(dados1, 'fabricante', 'categoria', 'quantidade');
+// console.log(resultadoFiltro);
+
+
+export {FiltroGrafico3};

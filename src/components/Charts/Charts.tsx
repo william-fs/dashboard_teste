@@ -2,13 +2,16 @@ import React, { Component } from "react";
 import Chart from "react-apexcharts";
 
 interface ChartsProps {
-    seriesM: { data: number[] }[];
+    seriesM: number[][];
+    yaxixConf: any;
+    // seriesM: { data: number[] }[];
     // categories: (string | string[])[];
 }
 
 interface ChartsState {
     seriesM: { data: number[] }[];
     options: any;
+    yaxixConf: any;
 }
 
 class Charts extends Component<ChartsProps, ChartsState>  {
@@ -47,11 +50,7 @@ constructor(props: ChartsProps) {
                 }
             },
             yaxis: {
-                labels: {
-                formatter: function (value: number) {
-                return `R$ ${value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
-                }
-            }
+                labels: props.yaxixConf,
             }
             },
         

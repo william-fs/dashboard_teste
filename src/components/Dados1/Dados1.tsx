@@ -31,9 +31,13 @@ import {somarQuantidadeAno2021, somarQuantidadeAno2022, somarQuantidadeAno2023} 
 import {somarPrecoMesJan, somarPrecoMesFev, somarPrecoMesMar, somarPrecoMesAbr, somarPrecoMesMai, somarPrecoMesJun, somarPrecoMesJul, somarPrecoMesAgo, somarPrecoMesSet, somarPrecoMesOut} from "./TotalSelect";
 import {somarQuantidadeMesJan, somarQuantidadeMesFev, somarQuantidadeMesMar, somarQuantidadeMesAbr, somarQuantidadeMesMai, somarQuantidadeMesJun, somarQuantidadeMesJul, somarQuantidadeMesAgo, somarQuantidadeMesSet, somarQuantidadeMesOut} from "./TotalSelect";
 
+// Import função de filtro para gráfico dos 3 campos 
+import {FiltroGrafico3} from "./TotalSelect";
+
 function Dados1() {
 
     // "Somas totais" para usar nos estados de atualização da tabela dinâmica 
+    // Preços 
     // Categorias 
     const categoriaPrecos = [somarPrecoCatElet, somarPrecoCatMov, somarPrecoCatRou, somarPrecoCatLiv, somarPrecoCatBel];
     const totalPrecoCategoria = [somarPrecoCatElet+somarPrecoCatMov+somarPrecoCatRou+somarPrecoCatLiv+somarPrecoCatBel];
@@ -49,6 +53,23 @@ function Dados1() {
     // Meses 
     const mesPrecos = [somarPrecoMesJan, somarPrecoMesFev, somarPrecoMesMar, somarPrecoMesAbr, somarPrecoMesMai, somarPrecoMesJun, somarPrecoMesJul, somarPrecoMesAgo, somarPrecoMesSet, somarPrecoMesOut];
     const totalPrecoMes = [somarPrecoMesJan+somarPrecoMesFev+somarPrecoMesMar+somarPrecoMesAbr+somarPrecoMesMai+somarPrecoMesJun+somarPrecoMesJul+somarPrecoMesAgo+somarPrecoMesSet+somarPrecoMesOut];
+
+    // Quantidades
+    // Categorias 
+    const categoriaQuantidades = [somarQuantidadeCatElet, somarQuantidadeCatMov, somarQuantidadeCatRou, somarQuantidadeCatLiv, somarQuantidadeCatBel];
+    const totalQuantidadeCategoria = [somarQuantidadeCatElet+somarQuantidadeCatMov+somarQuantidadeCatRou+somarQuantidadeCatLiv+somarQuantidadeCatBel];
+    // Fabricantes 
+    const fabricanteQuantidades = [somarQuantidadeFabX, somarQuantidadeFabY, somarQuantidadeFabZ];
+    const totalQuantidadeFabricante = [somarQuantidadeFabX+somarQuantidadeFabY+somarQuantidadeFabZ];
+    // Cores 
+    const corQuantidades = [somarQuantidadeCorVerm, somarQuantidadeCorAzul, somarQuantidadeCorVerde, somarQuantidadeCorPreto, somarQuantidadeCorBranco, somarQuantidadeCorCinza];
+    const totalQuantidadeCor = [somarQuantidadeCorVerm+somarQuantidadeCorAzul+somarQuantidadeCorVerde+somarQuantidadeCorPreto+somarQuantidadeCorBranco+somarQuantidadeCorCinza];
+    // Anos
+    const anoQuantidades = [somarQuantidadeAno2021, somarQuantidadeAno2022, somarQuantidadeAno2023];
+    const totalQuantidadeAno = [somarQuantidadeAno2021+somarQuantidadeAno2022+somarQuantidadeAno2023];
+    // Meses 
+    const mesQuantidades = [somarQuantidadeMesJan, somarQuantidadeMesFev, somarQuantidadeMesMar, somarQuantidadeMesAbr, somarQuantidadeMesMai, somarQuantidadeMesJun, somarQuantidadeMesJul, somarQuantidadeMesAgo, somarQuantidadeMesSet, somarQuantidadeMesOut];
+    const totalQuantidadeMes = [somarQuantidadeMesJan+somarQuantidadeMesFev+somarQuantidadeMesMar+somarQuantidadeMesAbr+somarQuantidadeMesMai+somarQuantidadeMesJun+somarQuantidadeMesJul+somarQuantidadeMesAgo+somarQuantidadeMesSet+somarQuantidadeMesOut];
     
     // *** NÃO ALTERAR *** 
     // Estado das seleções colocando no select o valor selecionado
@@ -108,6 +129,12 @@ function Dados1() {
     // Condicional Render da tabela 
     useEffect(() => {
         // Caso tente selecionar fora da ordem na solicitação das infos nos campos select 
+        if(selectValor1 === "nulo1" && selectValor2 === "nulo2") {
+            setPrecoSelecionado(false); 
+            setPrecoSelecionadoGraf(false);
+            setPrecoSelecionado3Campos(false); 
+            setPrecoSelecionadoGraf3Campos(false);
+        }
         if(selectValor0 === "nulo0") {
             setSelectValor0("nulo0"); 
             setSelectValor1("nulo1"); 
@@ -116,17 +143,28 @@ function Dados1() {
             setPrecoSelecionadoGraf(false);
             setPrecoSelecionado3Campos(false); 
             setPrecoSelecionadoGraf3Campos(false);
+
+            setQuantidadeSelecionado(false);
+            setQuantidadeSelecionadoGraf(false);
+            setQuantidadeSelecionadoGraf3Campos(false);
             return;}
         if(selectValor1 === "nulo1") {
             setSelectValor2("nulo2"); 
             setPrecoSelecionado(false); 
             setPrecoSelecionadoGraf(false);
             setPrecoSelecionado3Campos(false); 
+
+            setQuantidadeSelecionado(false);
+            setQuantidadeSelecionadoGraf(false);
             return;}
         if(selectValor2 === "nulo2") {
             setPrecoSelecionadoGraf(false);
             setPrecoSelecionado3Campos(false);
             setPrecoSelecionadoGraf3Campos(false);
+
+            setQuantidadeSelecionadoGraf(false);
+            setQuantidadeSelecionadoGraf3Campos(false);
+            setQuantidadeSelecionado3Campos(false);
         }
         
         return;
@@ -136,6 +174,11 @@ function Dados1() {
     const [precoSelecionadoGraf, setPrecoSelecionadoGraf] = useState(false);
     const [precoSelecionadoGraf3Campos, setPrecoSelecionadoGraf3Campos] = useState(false);
     const [precoSelecionado3Campos, setPrecoSelecionado3Campos] = useState(false);
+
+    const [quantidadeSelecionado, setQuantidadeSelecionado] = useState(false);
+    const [quantidadeSelecionadoGraf, setQuantidadeSelecionadoGraf] = useState(false);
+    const [quantidadeSelecionadoGraf3Campos, setQuantidadeSelecionadoGraf3Campos] = useState(false);
+    const [quantidadeSelecionado3Campos, setQuantidadeSelecionado3Campos] = useState(false);
     
     // Regras de seleções Campos 
     // Controle do Check para tabela/Gráfico 
@@ -147,15 +190,21 @@ function Dados1() {
     function graficoTF() {
         setGraficoCheck(!graficoCheck);
     }
-    // GRÁFICOS  
+    // GRÁFICOS / Valores da tabela
     // Valores para alimentar a tabela gráfica 
     const [mediaValores, setMediaValores] = useState();
-    const [detalhamento1, setDetalhamento1] = useState()
+    const [detalhamento1, setDetalhamento1] = useState();
 
     useEffect(() => {
         // Caso Preço selecionado
         if(selectValor0 === "preco") {
-            // 2 CAMPOS obs: Timeout para controlar o render do gráfico animado
+            setQuantidadeSelecionado(false);
+            setQuantidadeSelecionado3Campos(false);
+            setQuantidadeSelecionadoGraf(false);
+            setQuantidadeSelecionadoGraf3Campos(false);
+            setYaxixType2Campos(priceY2Campos);
+            setYaxixType3Campos(priceY3Campos);
+
             if(selectValor1 === "categoria") {
                 setPrecoSelecionado(false);
                 setPrecoSelecionadoGraf(false);
@@ -216,179 +265,581 @@ function Dados1() {
             }
 
             // 3 CAMPOS 
-            // CATEGORIA 
+            // CATEGORIA - Usar a função FiltroGrafico3 para adicionar a data e o name na tabela gráfica
             if(selectValor1 === "categoria" && selectValor2 === "fabricante") {
-                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false);}, 10);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionadoGraf3Campos(true);
                 setPrecoSelecionado3Campos(true);
-                setPrecoSelecionado3Campos(true);
                 setCampoDetalhamento2title(fabricantes)
-                setCampoDetalhamento2contet(fabricantes);
+                setCampoDetalhamento2content(fabricantes);
 
-                setDetalhamento1(categorias)
-                setMediaValores(categoriaPrecos);
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'fabricante', 'categoria', "preco")
+                setSeriesGraf3(trat);
             }
 
             if(selectValor1 === "categoria" && selectValor2 === "cor") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 setCampoDetalhamento2title(cores)
-                setCampoDetalhamento2contet(cores);
+                setCampoDetalhamento2content(cores);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'cor', 'categoria', "preco")
+                setSeriesGraf3(trat);
             }
 
             if(selectValor1 === "categoria" && selectValor2 === "ano") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 setCampoDetalhamento2title(anos)
-                setCampoDetalhamento2contet(anos);
+                setCampoDetalhamento2content(anos);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'ano', 'categoria', "preco")
+                setSeriesGraf3(trat);
             }
 
             if(selectValor1 === "categoria" && selectValor2 === "mes") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 // Obs: Tratamento dos meses de número para texto 
                 const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
                 const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
                 setCampoDetalhamento2title(mesesConvertidos)
-                setCampoDetalhamento2contet(meses);
+                setCampoDetalhamento2content(meses);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'mes', 'categoria', "preco")
+                setSeriesGraf3(trat);
             }
 
             // FABRICANTE
             if(selectValor1 === "fabricante" && selectValor2 === "categoria") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 setCampoDetalhamento2title(categorias)
-                setCampoDetalhamento2contet(categorias);
+                setCampoDetalhamento2content(categorias);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'categoria', 'fabricante', "preco")
+                setSeriesGraf3(trat);
             }
 
             if(selectValor1 === "fabricante" && selectValor2 === "cor") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 setCampoDetalhamento2title(cores)
-                setCampoDetalhamento2contet(cores);
+                setCampoDetalhamento2content(cores);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'cor', 'fabricante', "preco")
+                setSeriesGraf3(trat);
             }
 
             if(selectValor1 === "fabricante" && selectValor2 === "ano") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 setCampoDetalhamento2title(anos)
-                setCampoDetalhamento2contet(anos);
+                setCampoDetalhamento2content(anos);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'ano', 'fabricante', "preco")
+                setSeriesGraf3(trat);
             }
 
             if(selectValor1 === "fabricante" && selectValor2 === "mes") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 // Obs: Tratamento dos meses de número para texto 
                 const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
                 const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
                 setCampoDetalhamento2title(mesesConvertidos)
-                setCampoDetalhamento2contet(meses);
+                setCampoDetalhamento2content(meses);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'mes', 'fabricante', "preco");
+                setSeriesGraf3(trat);
             }
 
             // COR
             if(selectValor1 === "cor" && selectValor2 === "categoria") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 setCampoDetalhamento2title(categorias)
-                setCampoDetalhamento2contet(categorias);
+                setCampoDetalhamento2content(categorias);
+                
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'categoria', 'cor', "preco");
+                setSeriesGraf3(trat);
             }
 
             if(selectValor1 === "cor" && selectValor2 === "fabricante") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 setCampoDetalhamento2title(fabricantes)
-                setCampoDetalhamento2contet(fabricantes);
+                setCampoDetalhamento2content(fabricantes);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'fabricante', 'cor', "preco");
+                setSeriesGraf3(trat);
             }
 
             if(selectValor1 === "cor" && selectValor2 === "ano") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 setCampoDetalhamento2title(anos)
-                setCampoDetalhamento2contet(anos);
+                setCampoDetalhamento2content(anos);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'ano', 'cor', "preco");
+                setSeriesGraf3(trat);
             }
 
             if(selectValor1 === "cor" && selectValor2 === "mes") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 // Obs: Tratamento dos meses de número para texto 
                 const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
                 const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
                 setCampoDetalhamento2title(mesesConvertidos)
-                setCampoDetalhamento2contet(meses);
+                setCampoDetalhamento2content(meses);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'mes', 'cor', "preco");
+                setSeriesGraf3(trat);
             }
 
             // ANO
             if(selectValor1 === "ano" && selectValor2 === "categoria") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 setCampoDetalhamento2title(categorias)
-                setCampoDetalhamento2contet(categorias);
+                setCampoDetalhamento2content(categorias);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'categoria', 'ano', "preco");
+                setSeriesGraf3(trat);
             }
 
             if(selectValor1 === "ano" && selectValor2 === "fabricante") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 setCampoDetalhamento2title(fabricantes)
-                setCampoDetalhamento2contet(fabricantes);
+                setCampoDetalhamento2content(fabricantes);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'fabricante', 'ano', "preco");
+                setSeriesGraf3(trat);
             }
 
             if(selectValor1 === "ano" && selectValor2 === "cor") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 setCampoDetalhamento2title(cores)
-                setCampoDetalhamento2contet(cores);
+                setCampoDetalhamento2content(cores);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'cor', 'ano', "preco");
+                setSeriesGraf3(trat);
             }
 
             if(selectValor1 === "ano" && selectValor2 === "mes") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 // Obs: Tratamento dos meses de número para texto 
                 const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
                 const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
                 setCampoDetalhamento2title(mesesConvertidos)
-                setCampoDetalhamento2contet(meses);
+                setCampoDetalhamento2content(meses);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'mes', 'ano', "preco");
+                setSeriesGraf3(trat);
             }
 
             // MES
             if(selectValor1 === "mes" && selectValor2 === "categoria") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 setCampoDetalhamento2title(categorias)
-                setCampoDetalhamento2contet(categorias);
+                setCampoDetalhamento2content(categorias);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'categoria', 'mes', "preco");
+                setSeriesGraf3(trat);
             }
 
             if(selectValor1 === "mes" && selectValor2 === "fabricante") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 setCampoDetalhamento2title(fabricantes)
-                setCampoDetalhamento2contet(fabricantes);
+                setCampoDetalhamento2content(fabricantes);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'fabricante', 'mes', "preco");
+                setSeriesGraf3(trat);
             }
 
             if(selectValor1 === "mes" && selectValor2 === "cor") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 setCampoDetalhamento2title(cores)
-                setCampoDetalhamento2contet(cores);
+                setCampoDetalhamento2content(cores);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'cor', 'mes', "preco");
+                setSeriesGraf3(trat);
             }
 
             if(selectValor1 === "mes" && selectValor2 === "ano") {
-                setPrecoSelecionado(false);
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 setCampoDetalhamento2title(anos)
-                setCampoDetalhamento2contet(anos);
+                setCampoDetalhamento2content(anos);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'ano', 'mes', "preco");
+                setSeriesGraf3(trat);
             }
-            
+        }
+
+        // Caso Quantidade selecionada
+        if(selectValor0 === "quantidade") {
+            setPrecoSelecionado(false);
+            setPrecoSelecionado3Campos(false);
+            setPrecoSelecionadoGraf(false);
+            setPrecoSelecionadoGraf3Campos(false);
+            setYaxixType2Campos(quantY2Campos);
+            setYaxixType3Campos(quantY3Campos);
+
+            if(selectValor1 === "categoria") {
+                setQuantidadeSelecionado(false);
+                setQuantidadeSelecionadoGraf(false);
+                setTimeout(() => {setQuantidadeSelecionado(true), setQuantidadeSelecionadoGraf(true);}, 10);
+                setCampoDetalhamento1(categorias);
+                setCampoDetalhamento1Quantidade(categoriaQuantidades);
+                setCampoDetalhamento1Total(totalQuantidadeCategoria);
+
+                setDetalhamento1(categorias)
+                setMediaValores(categoriaQuantidades);
+            }
+            if(selectValor1 === "fabricante") {
+                setQuantidadeSelecionado(false);
+                setQuantidadeSelecionadoGraf(false);
+                setTimeout(() => {setQuantidadeSelecionado(true), setQuantidadeSelecionadoGraf(true);}, 10);
+                setCampoDetalhamento1(fabricantes);
+                setCampoDetalhamento1Quantidade(fabricanteQuantidades);
+                setCampoDetalhamento1Total(totalQuantidadeFabricante);
+
+                setDetalhamento1(fabricantes)
+                setMediaValores(fabricanteQuantidades);
+            }
+            if(selectValor1 === "cor") {
+                setQuantidadeSelecionado(false);
+                setQuantidadeSelecionadoGraf(false);
+                setTimeout(() => {setQuantidadeSelecionado(true), setQuantidadeSelecionadoGraf(true);}, 10);
+                setCampoDetalhamento1(cores);
+                setCampoDetalhamento1Quantidade(corQuantidades);
+                setCampoDetalhamento1Total(totalQuantidadeCor);
+
+                setDetalhamento1(cores)
+                setMediaValores(corQuantidades);
+            }
+            if(selectValor1 === "ano") {
+                setQuantidadeSelecionado(false);
+                setQuantidadeSelecionadoGraf(false);
+                setTimeout(() => {setQuantidadeSelecionado(true), setQuantidadeSelecionadoGraf(true);}, 10);
+                setCampoDetalhamento1(anos);
+                setCampoDetalhamento1Quantidade(anoQuantidades);
+                setCampoDetalhamento1Total(totalQuantidadeAno);
+
+                setDetalhamento1(anos)
+                setMediaValores(anoQuantidades);
+            }
+            if(selectValor1 === "mes") {
+                // Obs: Tratamento dos meses de número para texto 
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
+                const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
+                setQuantidadeSelecionado(false);
+                setQuantidadeSelecionadoGraf(false);
+                setTimeout(() => {setQuantidadeSelecionado(true), setQuantidadeSelecionadoGraf(true);}, 10);
+                setCampoDetalhamento1(mesesConvertidos);
+                setCampoDetalhamento1Quantidade(mesQuantidades);
+                setCampoDetalhamento1Total(totalQuantidadeMes);
+
+                setDetalhamento1(mesesConvertidos)
+                setMediaValores(mesQuantidades);
+            }
+
+            // 3 CAMPOS 
+            // CATEGORIA - Usar a função FiltroGrafico3 para adicionar a data e o name na tabela gráfica
+            if(selectValor1 === "categoria" && selectValor2 === "fabricante") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionadoGraf3Campos(true);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(fabricantes)
+                setCampoDetalhamento2content(fabricantes);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'fabricante', 'categoria', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "categoria" && selectValor2 === "cor") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(cores)
+                setCampoDetalhamento2content(cores);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'cor', 'categoria', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "categoria" && selectValor2 === "ano") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(anos)
+                setCampoDetalhamento2content(anos);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'ano', 'categoria', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "categoria" && selectValor2 === "mes") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                // Obs: Tratamento dos meses de número para texto 
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
+                const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
+                setCampoDetalhamento2title(mesesConvertidos)
+                setCampoDetalhamento2content(meses);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'mes', 'categoria', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            // FABRICANTE
+            if(selectValor1 === "fabricante" && selectValor2 === "categoria") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(categorias)
+                setCampoDetalhamento2content(categorias);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'categoria', 'fabricante', 'quantidade')
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "fabricante" && selectValor2 === "cor") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(cores)
+                setCampoDetalhamento2content(cores);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'cor', 'fabricante', 'quantidade')
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "fabricante" && selectValor2 === "ano") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(anos)
+                setCampoDetalhamento2content(anos);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'ano', 'fabricante', 'quantidade')
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "fabricante" && selectValor2 === "mes") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                // Obs: Tratamento dos meses de número para texto 
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
+                const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
+                setCampoDetalhamento2title(mesesConvertidos)
+                setCampoDetalhamento2content(meses);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'mes', 'fabricante', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            // COR
+            if(selectValor1 === "cor" && selectValor2 === "categoria") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(categorias)
+                setCampoDetalhamento2content(categorias);
+                
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'categoria', 'cor', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "cor" && selectValor2 === "fabricante") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(fabricantes)
+                setCampoDetalhamento2content(fabricantes);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'fabricante', 'cor', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "cor" && selectValor2 === "ano") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(anos)
+                setCampoDetalhamento2content(anos);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'ano', 'cor', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "cor" && selectValor2 === "mes") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                // Obs: Tratamento dos meses de número para texto 
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
+                const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
+                setCampoDetalhamento2title(mesesConvertidos)
+                setCampoDetalhamento2content(meses);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'mes', 'cor', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            // ANO
+            if(selectValor1 === "ano" && selectValor2 === "categoria") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(categorias)
+                setCampoDetalhamento2content(categorias);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'categoria', 'ano', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "ano" && selectValor2 === "fabricante") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(fabricantes)
+                setCampoDetalhamento2content(fabricantes);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'fabricante', 'ano', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "ano" && selectValor2 === "cor") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(cores)
+                setCampoDetalhamento2content(cores);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'cor', 'ano', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "ano" && selectValor2 === "mes") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                // Obs: Tratamento dos meses de número para texto 
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
+                const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
+                setCampoDetalhamento2title(mesesConvertidos)
+                setCampoDetalhamento2content(meses);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'mes', 'ano', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            // MES
+            if(selectValor1 === "mes" && selectValor2 === "categoria") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(categorias)
+                setCampoDetalhamento2content(categorias);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'categoria', 'mes', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "mes" && selectValor2 === "fabricante") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(fabricantes)
+                setCampoDetalhamento2content(fabricantes);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'fabricante', 'mes', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "mes" && selectValor2 === "cor") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(cores)
+                setCampoDetalhamento2content(cores);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'cor', 'mes', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "mes" && selectValor2 === "ano") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(anos)
+                setCampoDetalhamento2content(anos);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'ano', 'mes', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+        }
+        
+        if((selectValor0 === "nulo0" && selectValor1 === "nulo1" && selectValor2 === "nulo2") || 
+        (selectValor0 !== "nulo0" && selectValor1 === "nulo1" && selectValor2 === "nulo2")) {
+            setTimeout(() => {
+                setPrecoSelecionado(false);
+                setQuantidadeSelecionado(false);
+                setPrecoSelecionado3Campos(false);
+                setQuantidadeSelecionado3Campos(false);
+                setPrecoSelecionadoGraf(false);
+                setQuantidadeSelecionadoGraf(false);
+                setPrecoSelecionadoGraf3Campos(false);
+                setQuantidadeSelecionadoGraf3Campos(false);
+            }, 100);
         }
         return;
     },[selectValor0, selectValor1, selectValor2, contentSelecionado0, contentSelecionado1, contentSelecionado2]);
 
     // Estados para criar de forma dinâmica a tabela com as 2 primeiras informações 
+    // Preço 
     const [campoDetalhamento1, setCampoDetalhamento1] = useState<string[]>([]);
     const [campoDetalhamento1Preco, setCampoDetalhamento1Preco] = useState<number[]>([]);
     const [campoDetalhamento1Total, setCampoDetalhamento1Total] = useState<number[]>([]);
 
+    // Quantidade 
+    const [campoDetalhamento1Quantidade, setCampoDetalhamento1Quantidade] = useState<number[]>([]);
+
     // Estados para criar de forma dinâmica a tabela com as 3 informações selecionadas
-    const [campoDetalhamento2contet, setCampoDetalhamento2contet] = useState<string[] | number[] | string | number>([]);
+    // obs: Campo detalhamento title criado para fazer o tratamento dos meses números para nomes
+    const [campoDetalhamento2content, setCampoDetalhamento2content] = useState<string[] | number[] | string | number>([]);
     const [campoDetalhamento2title, setCampoDetalhamento2title] = useState<string[] | number[] | string | number>([]);
 
     const filtrarUnicos = (campo: string) => {
@@ -434,6 +885,97 @@ function Dados1() {
     const formatarMoeda = (valor: number) => {
         return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     };
+
+    // tabela gráfica tratamento de quantidade(numero) ou valor(moeda R$)
+    // 2 campos 
+    const [yaxixType2Campos, setYaxixType2Campos] = useState("");
+    const priceY2Campos =  {
+        formatter: function (value: number) {
+            return `R$ ${value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
+            }
+        }
+        const quantY2Campos = {
+            formatter: function (value: number) {
+                return value;
+                }
+        }
+
+    // 3 campos 
+    const [yaxixType3Campos, setYaxixType3Campos] = useState("");
+    const priceY3Campos =  {
+        formatter: function (value: number) {
+            return `R$ ${value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
+            }
+        }
+        const quantY3Campos = {
+            formatter: function (value: number) {
+                return value;
+                }
+        }
+
+    
+
+    // Tabela Gráfica quando todos os campos são selecionados 
+    const [seriesGraf3, setSeriesGraf3] = useState("");
+
+    const series = 
+    seriesGraf3;
+    
+    const options = {
+        chart: {
+            type: 'bar',
+            height: 350,
+            stacked: true,
+            toolbar: {
+                show: true
+            },
+            zoom: {
+                enabled: true
+            }
+            },
+            responsive: [{
+            breakpoint: 480,
+            options: {
+                legend: {
+                position: 'bottom',
+                offsetX: -10,
+                offsetY: 0
+                }
+            }
+            }],
+            plotOptions: {
+            bar: {
+                horizontal: false,
+                borderRadiusApplication: 'end',
+                borderRadiusWhenStacked: 'last',
+                dataLabels: {
+                total: {
+                    enabled: false,
+                    style: {
+                    fontSize: '13px',
+                    fontWeight: 900
+                    }
+                }
+                }
+            },
+            
+            },
+            xaxis: {
+            categories: campoDetalhamento1,
+            },
+            yaxis: {
+                labels: yaxixType3Campos,
+            },
+            dataLabels: {
+                enabled: false,
+            },
+            legend: {
+            position: 'bottom',
+            },
+            fill: {
+            opacity: 1
+            }
+        };
 
 
     return(
@@ -498,43 +1040,108 @@ function Dados1() {
                                 }
                             />
                         </>
+                    )} 
+
+                    {quantidadeSelecionado && (
+                        <>
+                            <Tabela 
+                                titleTable={
+                                    <tr>
+                                        <td colSpan={2}>{contentSelecionado1}</td>
+                                    </tr>
+                                }
+                                contentTable={
+                                    <>
+                                        {(campoDetalhamento1).map((e, i) => (
+                                            <tr key={i}>
+                                                <td>{e}</td>
+                                                <td>{campoDetalhamento1Quantidade[i]}</td>
+                                            </tr>
+                                        ))}
+                                    </>
+                                }
+                                totalTable={
+                                    <tr>
+                                        <td style={{fontWeight:"bold"}}>Total</td>
+                                        <td style={{fontWeight:"bold"}}>{campoDetalhamento1Total}</td>
+                                    </tr>
+                                }
+                            />
+                        </>
                     )}  
+                    
 
                     {precoSelecionado3Campos && (
-                                    <div>
-                                        <Tabela 
-                                            titleTable={
-                                                <tr>
-                                                    <th>{contentSelecionado1}</th>
-                                                    
-                                                    {campoDetalhamento2title.map((e, i) => (
-                                                    <th key={i}>{e}</th>
-                                                    ))}
-                                                </tr>
-                                            }
-                                            contentTable={
-                                                <>
-                                                    {tabela.map((linha, i) => (
-                                                        <tr key={i}>
-                                                        <td>{linha.propriedade}</td>
-                                                        {campoDetalhamento2contet.map((el, i) => (
-                                                            <td key={i}>{formatarMoeda(linha[el] || 'R$ 0.00')}</td>
-                                                        ))}
-                                                        </tr>
-                                                    ))}
-                                                </>
-                                            }
-                                            totalTable={
-                                                <tr>
-                                                    <td style={{fontWeight:"bold"}}>Total</td>
-                                                    {campoDetalhamento2contet.map((d2, i) => (
-                                                        <td key={i} style={{fontWeight:"bold"}}>{formatarMoeda(calcularTotalPorColuna(d2))}</td>
-                                                    ))}
-                                                </tr>
-                                            }
-                                        />
-                                    </div>
-                                )}
+                        <div>
+                            <Tabela 
+                                titleTable={
+                                    <tr>
+                                        <th>{contentSelecionado1}</th>
+                                        
+                                        {campoDetalhamento2title.map((e, i) => (
+                                        <th key={i}>{e}</th>
+                                        ))}
+                                    </tr>
+                                }
+                                contentTable={
+                                    <>
+                                        {tabela.map((linha, i) => (
+                                            <tr key={i}>
+                                            <td>{linha.propriedade}</td>
+                                            {campoDetalhamento2content.map((el, i) => (
+                                                <td key={i}>{formatarMoeda(linha[el] || 'R$ 0.00')}</td>
+                                            ))}
+                                            </tr>
+                                        ))}
+                                    </>
+                                }
+                                totalTable={
+                                    <tr>
+                                        <td style={{fontWeight:"bold"}}>Total</td>
+                                        {campoDetalhamento2content.map((d2, i) => (
+                                            <td key={i} style={{fontWeight:"bold"}}>{formatarMoeda(calcularTotalPorColuna(d2))}</td>
+                                        ))}
+                                    </tr>
+                                }
+                            />
+                        </div>
+                    )}
+
+                    {quantidadeSelecionado3Campos && (
+                        <div>
+                            <Tabela 
+                                titleTable={
+                                    <tr>
+                                        <th>{contentSelecionado1}</th>
+                                        
+                                        {campoDetalhamento2title.map((e, i) => (
+                                        <th key={i}>{e}</th>
+                                        ))}
+                                    </tr>
+                                }
+                                contentTable={
+                                    <>
+                                        {tabela.map((linha, i) => (
+                                            <tr key={i}>
+                                            <td>{linha.propriedade}</td>
+                                            {campoDetalhamento2content.map((el, i) => (
+                                                <td key={i}>{linha[el] || '0'}</td>
+                                            ))}
+                                            </tr>
+                                        ))}
+                                    </>
+                                }
+                                totalTable={
+                                    <tr>
+                                        <td style={{fontWeight:"bold"}}>Total</td>
+                                        {campoDetalhamento2content.map((d2, i) => (
+                                            <td key={i} style={{fontWeight:"bold"}}>{calcularTotalPorColuna(d2)}</td>
+                                        ))}
+                                    </tr>
+                                }
+                            />
+                        </div>
+                    )}
                                 
                 </div>
             )}  
@@ -542,23 +1149,19 @@ function Dados1() {
             {graficoCheck && (
                 <div style={{width: "100%"}}>
                     {precoSelecionadoGraf && (
-                        <Charts seriesM={mediaValores} categories={detalhamento1} />
+                        <Charts seriesM={mediaValores} categories={detalhamento1} yaxixConf={yaxixType2Campos} />
+                    )}
+
+                    {quantidadeSelecionadoGraf && (
+                        <Charts seriesM={mediaValores} categories={detalhamento1} yaxixConf={yaxixType2Campos} />
                     )}
 
                     {precoSelecionadoGraf3Campos && (
-                        <Charts3Campos series={[
-                            {
-                                name: 'PRODUCT AAAAAAA',
-                                data: [44, 55, 41, 67, 22, 43]
-                            }, {
-                                name: 'PRODUCT AAAAAAA',
-                                data: [44, 55, 41, 67, 22, 43]
-                            }, 
-                            {
-                                name: 'PRODUCT AAAAAAA',
-                                data: [44, 55, 41, 67, 22, 43]
-                            }, 
-                        ]} categories={detalhamento1} />
+                        <Charts3Campos options={options} series={series} />
+                    )}
+
+                    {quantidadeSelecionadoGraf3Campos && (
+                        <Charts3Campos options={options} series={series} />
                     )}
                 </div>
             )}
