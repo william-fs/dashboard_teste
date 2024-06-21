@@ -2,6 +2,8 @@ import dados1 from "../../dados/fonte_de_dados_1.json";
 
 // Valores usados nos campos 
 const valores = [
+    {valor: "id", conteudo: "ID"},
+    {valor: "nome", conteudo: "Produto"},
     {valor: "categoria", conteudo: "Categoria"},
     {valor: "fabricante", conteudo: "Fabricante"},
     {valor: "cor", conteudo: "Cor"},
@@ -11,16 +13,108 @@ const valores = [
 export {valores};
 
 // Filtro: conteúdo duplicados 
+const ids = Array.from(new Set(dados1.map(dado => dado.id)));
+const produtos = Array.from(new Set(dados1.map(dado => dado.nome)));
 const categorias = Array.from(new Set(dados1.map(dado => dado.categoria)));
 const fabricantes = Array.from(new Set(dados1.map(dado => dado.fabricante)));
 const cores = Array.from(new Set(dados1.map(dado => dado.cor)));
-const anos = Array.from(new Set(dados1.map(dado => dado.ano)));
-const meses = Array.from(new Set(dados1.map(dado => dado.mes)));
+const anos:(number[] | string[]) = Array.from(new Set(dados1.map(dado => dado.ano)));
+const meses:(number[] | string[]) = Array.from(new Set(dados1.map(dado => dado.mes)));
 
 
-export {categorias, fabricantes, cores, anos, meses};
+export {ids, produtos, categorias, fabricantes, cores, anos, meses};
 
 // Filtrar por Tipo de dado para extrair os valores de soma - 
+// Filtrar por Tipo de Categoria, Preço e ID - 
+// ID 1
+const id1Filtrado = dados1.filter(id => id.id === 1);
+const somarId1 = Number(id1Filtrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeId1 = id1Filtrado.reduce((total, item) => total + item.quantidade, 0);
+// ID 2
+const id2Filtrado = dados1.filter(id => id.id === 2);
+const somarId2 = Number(id2Filtrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeId2 = id2Filtrado.reduce((total, item) => total + item.quantidade, 0);
+// ID 3
+const id3Filtrado = dados1.filter(id => id.id === 3);
+const somarId3 = Number(id3Filtrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeId3 = id3Filtrado.reduce((total, item) => total + item.quantidade, 0);
+// ID 4
+const id4Filtrado = dados1.filter(id => id.id === 4);
+const somarId4 = Number(id4Filtrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeId4 = id4Filtrado.reduce((total, item) => total + item.quantidade, 0);
+// ID 5
+const id5Filtrado = dados1.filter(id => id.id === 5);
+const somarId5 = Number(id5Filtrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeId5 = id5Filtrado.reduce((total, item) => total + item.quantidade, 0);
+// ID 6
+const id6Filtrado = dados1.filter(id => id.id === 6);
+const somarId6 = Number(id6Filtrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeId6 = id6Filtrado.reduce((total, item) => total + item.quantidade, 0);
+// ID 7
+const id7Filtrado = dados1.filter(id => id.id === 7);
+const somarId7 = Number(id7Filtrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeId7 = id7Filtrado.reduce((total, item) => total + item.quantidade, 0);
+// ID 8
+const id8Filtrado = dados1.filter(id => id.id === 8);
+const somarId8 = Number(id8Filtrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeId8 = id8Filtrado.reduce((total, item) => total + item.quantidade, 0);
+// ID 9
+const id9Filtrado = dados1.filter(id => id.id === 9);
+const somarId9 = Number(id9Filtrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeId9 = id9Filtrado.reduce((total, item) => total + item.quantidade, 0);
+// ID 10
+const id10Filtrado = dados1.filter(id => id.id === 10);
+const somarId10 = Number(id10Filtrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeId10 = id10Filtrado.reduce((total, item) => total + item.quantidade, 0);
+
+export {somarId1, somarId2, somarId3, somarId4, somarId5, somarId6, somarId7, somarId8, somarId9, somarId10};
+export {somarQuantidadeId1, somarQuantidadeId2, somarQuantidadeId3, somarQuantidadeId4, somarQuantidadeId5, somarQuantidadeId6, somarQuantidadeId7, somarQuantidadeId8, somarQuantidadeId9, somarQuantidadeId10};
+
+// Filtrar por Tipo de Categoria, Preço e Produto - 
+// Produto A
+const produtoProdAFiltrado = dados1.filter(prod => prod.nome === "Produto A");
+const somarPrecoProdA = Number(produtoProdAFiltrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeProdA = produtoProdAFiltrado.reduce((total, item) => total + item.quantidade, 0);
+// Produto B
+const produtoProdBFiltrado = dados1.filter(prod => prod.nome === "Produto B");
+const somarPrecoProdB = Number(produtoProdBFiltrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeProdB = produtoProdBFiltrado.reduce((total, item) => total + item.quantidade, 0);
+// Produto C
+const produtoProdCFiltrado = dados1.filter(prod => prod.nome === "Produto C");
+const somarPrecoProdC = Number(produtoProdCFiltrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeProdC = produtoProdCFiltrado.reduce((total, item) => total + item.quantidade, 0);
+// Produto D
+const produtoProdDFiltrado = dados1.filter(prod => prod.nome === "Produto D");
+const somarPrecoProdD = Number(produtoProdDFiltrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeProdD = produtoProdDFiltrado.reduce((total, item) => total + item.quantidade, 0);
+// Produto E
+const produtoProdEFiltrado = dados1.filter(prod => prod.nome === "Produto E");
+const somarPrecoProdE = Number(produtoProdEFiltrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeProdE = produtoProdEFiltrado.reduce((total, item) => total + item.quantidade, 0);
+// Produto F
+const produtoProdFFiltrado = dados1.filter(prod => prod.nome === "Produto F");
+const somarPrecoProdF = Number(produtoProdFFiltrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeProdF = produtoProdFFiltrado.reduce((total, item) => total + item.quantidade, 0);
+// Produto G
+const produtoProdGFiltrado = dados1.filter(prod => prod.nome === "Produto G");
+const somarPrecoProdG = Number(produtoProdGFiltrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeProdG = produtoProdGFiltrado.reduce((total, item) => total + item.quantidade, 0);
+// Produto H
+const produtoProdHFiltrado = dados1.filter(prod => prod.nome === "Produto H");
+const somarPrecoProdH = Number(produtoProdHFiltrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeProdH = produtoProdHFiltrado.reduce((total, item) => total + item.quantidade, 0);
+// Produto I
+const produtoProdIFiltrado = dados1.filter(prod => prod.nome === "Produto I");
+const somarPrecoProdI = Number(produtoProdIFiltrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeProdI = produtoProdIFiltrado.reduce((total, item) => total + item.quantidade, 0);
+// Produto J
+const produtoProdJFiltrado = dados1.filter(prod => prod.nome === "Produto J");
+const somarPrecoProdJ = Number(produtoProdJFiltrado.reduce((total, item) => total + item.preco, 0).toFixed(2));
+const somarQuantidadeProdJ = produtoProdJFiltrado.reduce((total, item) => total + item.quantidade, 0);
+
+export {somarPrecoProdA, somarPrecoProdB, somarPrecoProdC, somarPrecoProdD, somarPrecoProdE, somarPrecoProdF, somarPrecoProdG, somarPrecoProdH, somarPrecoProdI, somarPrecoProdJ};
+export {somarQuantidadeProdA, somarQuantidadeProdB, somarQuantidadeProdC, somarQuantidadeProdD, somarQuantidadeProdE, somarQuantidadeProdF, somarQuantidadeProdG, somarQuantidadeProdH, somarQuantidadeProdI, somarQuantidadeProdJ};
+
 // Filtrar por Tipo de Categoria, Preço e Quantidade - 
 // Eletronicos 
 const categoriaEletFiltrado = dados1.filter(cat => cat.categoria === "Eletrônicos");
@@ -200,8 +294,8 @@ data.forEach(item => {
     agrupamento[grupoKey][PreenchimentoKey] += item[valorCampo];
 });
 
-// Converte os dados para o formato Series[] e garante duas casas decimais
-const result: Series[] = Object.keys(agrupamento).map(grupoKey => {
+// Converte os dados para o formato FiltroGraf3[] e garante duas casas decimais
+const result: FiltroGraf3[] = Object.keys(agrupamento).map(grupoKey => {
     return {
     name: grupoKey,
     data: preencherLista.map(PreenchimentoKey => parseFloat(agrupamento[grupoKey][PreenchimentoKey].toFixed(2)))

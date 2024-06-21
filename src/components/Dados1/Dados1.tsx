@@ -11,8 +11,14 @@ import dados1 from "../../dados/fonte_de_dados_1.json";
 import {valores} from "./TotalSelect";
 
 // Import valores de soma/total referente ao primeiro campo:
+import {ids, produtos, categorias, fabricantes, cores, anos, meses} from "./TotalSelect";
+// import IDs tratados 
+import {somarId1, somarId2, somarId3, somarId4, somarId5, somarId6, somarId7, somarId8, somarId9, somarId10} from "./TotalSelect";
+import {somarQuantidadeId1, somarQuantidadeId2, somarQuantidadeId3, somarQuantidadeId4, somarQuantidadeId5, somarQuantidadeId6, somarQuantidadeId7, somarQuantidadeId8, somarQuantidadeId9, somarQuantidadeId10} from "./TotalSelect";
+// Import Produtos tratados 
+import {somarPrecoProdA, somarPrecoProdB, somarPrecoProdC, somarPrecoProdD, somarPrecoProdE, somarPrecoProdF, somarPrecoProdG, somarPrecoProdH, somarPrecoProdI, somarPrecoProdJ} from "./TotalSelect";
+import {somarQuantidadeProdA, somarQuantidadeProdB, somarQuantidadeProdC, somarQuantidadeProdD, somarQuantidadeProdE, somarQuantidadeProdF, somarQuantidadeProdG, somarQuantidadeProdH, somarQuantidadeProdI, somarQuantidadeProdJ} from "./TotalSelect";
 // Import Categoria tratadas 
-import {categorias, fabricantes, cores, anos, meses} from "./TotalSelect";
 import {somarPrecoCatElet, somarQuantidadeCatElet} from "./TotalSelect";
 import {somarPrecoCatMov, somarQuantidadeCatMov} from "./TotalSelect";
 import {somarPrecoCatRou, somarQuantidadeCatRou} from "./TotalSelect";
@@ -38,6 +44,12 @@ function Dados1() {
 
     // "Somas totais" para usar nos estados de atualização da tabela dinâmica 
     // Preços 
+    // IDs
+    const idPrecos = [somarId1, somarId2, somarId3, somarId4, somarId5, somarId6, somarId7, somarId8, somarId9, somarId10];
+    const totalPrecoId = [somarId1+somarId2+somarId3+somarId4+somarId5+somarId6+somarId7+somarId8+somarId9+somarId10];
+    // Produtos 
+    const produtoPrecos = [somarPrecoProdA, somarPrecoProdB, somarPrecoProdC, somarPrecoProdD, somarPrecoProdE, somarPrecoProdF, somarPrecoProdG, somarPrecoProdH, somarPrecoProdI, somarPrecoProdJ];
+    const totalPrecoProduto = [somarPrecoProdA+somarPrecoProdB+somarPrecoProdC+somarPrecoProdD+somarPrecoProdE+somarPrecoProdF+somarPrecoProdG+somarPrecoProdH+somarPrecoProdI+somarPrecoProdJ];
     // Categorias 
     const categoriaPrecos = [somarPrecoCatElet, somarPrecoCatMov, somarPrecoCatRou, somarPrecoCatLiv, somarPrecoCatBel];
     const totalPrecoCategoria = [somarPrecoCatElet+somarPrecoCatMov+somarPrecoCatRou+somarPrecoCatLiv+somarPrecoCatBel];
@@ -55,6 +67,12 @@ function Dados1() {
     const totalPrecoMes = [somarPrecoMesJan+somarPrecoMesFev+somarPrecoMesMar+somarPrecoMesAbr+somarPrecoMesMai+somarPrecoMesJun+somarPrecoMesJul+somarPrecoMesAgo+somarPrecoMesSet+somarPrecoMesOut];
 
     // Quantidades
+    // IDs
+    const idQuantidades = [somarQuantidadeId1, somarQuantidadeId2, somarQuantidadeId3, somarQuantidadeId4, somarQuantidadeId5, somarQuantidadeId6, somarQuantidadeId7, somarQuantidadeId8, somarQuantidadeId9, somarQuantidadeId10];
+    const totalQuantidadeId = [somarQuantidadeId1+somarQuantidadeId2+somarQuantidadeId3+somarQuantidadeId4+somarQuantidadeId5+somarQuantidadeId6+somarQuantidadeId7+somarQuantidadeId8+somarQuantidadeId9+somarQuantidadeId10];
+    // Produtos 
+    const produtoQuantidades = [somarQuantidadeProdA, somarQuantidadeProdB, somarQuantidadeProdC, somarQuantidadeProdD, somarQuantidadeProdE, somarQuantidadeProdF, somarQuantidadeProdG, somarQuantidadeProdH, somarQuantidadeProdI, somarQuantidadeProdJ];
+    const totalQuantidadeProduto = [somarQuantidadeProdA+somarQuantidadeProdB+somarQuantidadeProdC+somarQuantidadeProdD+somarQuantidadeProdE+somarQuantidadeProdF+somarQuantidadeProdG+somarQuantidadeProdH+somarQuantidadeProdI+somarQuantidadeProdJ];
     // Categorias 
     const categoriaQuantidades = [somarQuantidadeCatElet, somarQuantidadeCatMov, somarQuantidadeCatRou, somarQuantidadeCatLiv, somarQuantidadeCatBel];
     const totalQuantidadeCategoria = [somarQuantidadeCatElet+somarQuantidadeCatMov+somarQuantidadeCatRou+somarQuantidadeCatLiv+somarQuantidadeCatBel];
@@ -205,6 +223,28 @@ function Dados1() {
             setYaxixType2Campos(priceY2Campos);
             setYaxixType3Campos(priceY3Campos);
 
+            if(selectValor1 === "id") {
+                setPrecoSelecionado(false);
+                setPrecoSelecionadoGraf(false);
+                setTimeout(() => {setPrecoSelecionado(true), setPrecoSelecionadoGraf(true);}, 10);
+                setCampoDetalhamento1(ids);
+                setCampoDetalhamento1Preco(idPrecos);
+                setCampoDetalhamento1Total(totalPrecoId);
+
+                setDetalhamento1(ids)
+                setMediaValores(idPrecos);
+            }
+            if(selectValor1 === "nome") {
+                setPrecoSelecionado(false);
+                setPrecoSelecionadoGraf(false);
+                setTimeout(() => {setPrecoSelecionado(true), setPrecoSelecionadoGraf(true);}, 10);
+                setCampoDetalhamento1(produtos);
+                setCampoDetalhamento1Preco(produtoPrecos);
+                setCampoDetalhamento1Total(totalPrecoProduto);
+
+                setDetalhamento1(produtos)
+                setMediaValores(produtoPrecos);
+            }
             if(selectValor1 === "categoria") {
                 setPrecoSelecionado(false);
                 setPrecoSelecionadoGraf(false);
@@ -251,7 +291,7 @@ function Dados1() {
             }
             if(selectValor1 === "mes") {
                 // Obs: Tratamento dos meses de número para texto 
-                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
                 const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
                 setPrecoSelecionado(false);
                 setPrecoSelecionadoGraf(false);
@@ -262,10 +302,180 @@ function Dados1() {
 
                 setDetalhamento1(mesesConvertidos)
                 setMediaValores(mesPrecos);
+                return;
             }
 
-            // 3 CAMPOS 
-            // CATEGORIA - Usar a função FiltroGrafico3 para adicionar a data e o name na tabela gráfica
+            // 3 CAMPOS -  Usar a função FiltroGrafico3 para adicionar a data e o name na tabela gráfica
+            // ID's
+            if(selectValor1 === "id" && selectValor2 === "nome") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionadoGraf3Campos(true);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(produtos)
+                setCampoDetalhamento2content(produtos);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'nome', 'id', "preco")
+                setSeriesGraf3(trat);
+            }
+            if(selectValor1 === "id" && selectValor2 === "categoria") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionadoGraf3Campos(true);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(categorias)
+                setCampoDetalhamento2content(categorias);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'categoria', 'id', "preco")
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "id" && selectValor2 === "fabricante") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionadoGraf3Campos(true);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(fabricantes)
+                setCampoDetalhamento2content(fabricantes);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'fabricante', 'id', "preco")
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "id" && selectValor2 === "cor") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(cores)
+                setCampoDetalhamento2content(cores);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'cor', 'id', "preco")
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "id" && selectValor2 === "ano") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(anos)
+                setCampoDetalhamento2content(anos);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'ano', 'id', "preco")
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "id" && selectValor2 === "mes") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionado3Campos(true);
+                // Obs: Tratamento dos meses de número para texto 
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+                const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
+                setCampoDetalhamento2title(mesesConvertidos)
+                setCampoDetalhamento2content(meses);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'mes', 'id', "preco")
+                setSeriesGraf3(trat);
+            }
+
+            // PRODUTOS
+            if(selectValor1 === "nome" && selectValor2 === "id") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionadoGraf3Campos(true);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(ids)
+                setCampoDetalhamento2content(ids);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'id', 'nome', "preco")
+                setSeriesGraf3(trat);
+            }
+            
+            if(selectValor1 === "nome" && selectValor2 === "categoria") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionadoGraf3Campos(true);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(categorias)
+                setCampoDetalhamento2content(categorias);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'categoria', 'nome', "preco")
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "nome" && selectValor2 === "fabricante") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionadoGraf3Campos(true);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(fabricantes)
+                setCampoDetalhamento2content(fabricantes);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'fabricante', 'nome', "preco")
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "nome" && selectValor2 === "cor") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(cores)
+                setCampoDetalhamento2content(cores);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'cor', 'nome', "preco")
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "nome" && selectValor2 === "ano") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(anos)
+                setCampoDetalhamento2content(anos);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'ano', 'nome', "preco")
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "nome" && selectValor2 === "mes") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionado3Campos(true);
+                // Obs: Tratamento dos meses de número para texto 
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+                const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
+                setCampoDetalhamento2title(mesesConvertidos)
+                setCampoDetalhamento2content(meses);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'mes', 'nome', "preco")
+                setSeriesGraf3(trat);
+            }
+
+            // CATEGORIA
+            if(selectValor1 === "categoria" && selectValor2 === "id") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionadoGraf3Campos(true);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(ids)
+                setCampoDetalhamento2content(ids);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'id', 'categoria', "preco")
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "categoria" && selectValor2 === "nome") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionadoGraf3Campos(true);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(produtos)
+                setCampoDetalhamento2content(produtos);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'nome', 'categoria', "preco")
+                setSeriesGraf3(trat);
+            }
+
             if(selectValor1 === "categoria" && selectValor2 === "fabricante") {
                 setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionadoGraf3Campos(true);
@@ -304,7 +514,7 @@ function Dados1() {
                 setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 // Obs: Tratamento dos meses de número para texto 
-                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
                 const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
                 setCampoDetalhamento2title(mesesConvertidos)
                 setCampoDetalhamento2content(meses);
@@ -315,6 +525,28 @@ function Dados1() {
             }
 
             // FABRICANTE
+            if(selectValor1 === "fabricante" && selectValor2 === "id") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(ids)
+                setCampoDetalhamento2content(ids);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'id', 'fabricante', "preco")
+                setSeriesGraf3(trat);
+            }
+            
+            if(selectValor1 === "fabricante" && selectValor2 === "nome") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(produtos)
+                setCampoDetalhamento2content(produtos);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'nome', 'fabricante', "preco")
+                setSeriesGraf3(trat);
+            }
+
             if(selectValor1 === "fabricante" && selectValor2 === "categoria") {
                 setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
@@ -352,7 +584,7 @@ function Dados1() {
                 setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 // Obs: Tratamento dos meses de número para texto 
-                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
                 const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
                 setCampoDetalhamento2title(mesesConvertidos)
                 setCampoDetalhamento2content(meses);
@@ -363,6 +595,28 @@ function Dados1() {
             }
 
             // COR
+            if(selectValor1 === "cor" && selectValor2 === "id") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(ids)
+                setCampoDetalhamento2content(ids);
+                
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'id', 'cor', "preco");
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "cor" && selectValor2 === "nome") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(produtos)
+                setCampoDetalhamento2content(produtos);
+                
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'nome', 'cor', "preco");
+                setSeriesGraf3(trat);
+            }
+
             if(selectValor1 === "cor" && selectValor2 === "categoria") {
                 setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
@@ -400,7 +654,7 @@ function Dados1() {
                 setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 // Obs: Tratamento dos meses de número para texto 
-                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
                 const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
                 setCampoDetalhamento2title(mesesConvertidos)
                 setCampoDetalhamento2content(meses);
@@ -411,6 +665,28 @@ function Dados1() {
             }
 
             // ANO
+            if(selectValor1 === "ano" && selectValor2 === "id") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(ids)
+                setCampoDetalhamento2content(ids);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'id', 'ano', "preco");
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "ano" && selectValor2 === "nome") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(produtos)
+                setCampoDetalhamento2content(produtos);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'nome', 'ano', "preco");
+                setSeriesGraf3(trat);
+            }
+
             if(selectValor1 === "ano" && selectValor2 === "categoria") {
                 setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
@@ -448,7 +724,7 @@ function Dados1() {
                 setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
                 // Obs: Tratamento dos meses de número para texto 
-                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
                 const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
                 setCampoDetalhamento2title(mesesConvertidos)
                 setCampoDetalhamento2content(meses);
@@ -459,6 +735,28 @@ function Dados1() {
             }
 
             // MES
+            if(selectValor1 === "mes" && selectValor2 === "id") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(ids)
+                setCampoDetalhamento2content(ids);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'id', 'mes', "preco");
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "mes" && selectValor2 === "nome") {
+                setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
+                setPrecoSelecionado3Campos(true);
+                setCampoDetalhamento2title(produtos)
+                setCampoDetalhamento2content(produtos);
+
+                setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'nome', 'mes', "preco");
+                setSeriesGraf3(trat);
+            }
+
             if(selectValor1 === "mes" && selectValor2 === "categoria") {
                 setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
@@ -513,6 +811,28 @@ function Dados1() {
             setYaxixType2Campos(quantY2Campos);
             setYaxixType3Campos(quantY3Campos);
 
+            if(selectValor1 === "id") {
+                setQuantidadeSelecionado(false);
+                setQuantidadeSelecionadoGraf(false);
+                setTimeout(() => {setQuantidadeSelecionado(true), setQuantidadeSelecionadoGraf(true);}, 10);
+                setCampoDetalhamento1(ids);
+                setCampoDetalhamento1Quantidade(idQuantidades);
+                setCampoDetalhamento1Total(totalQuantidadeId);
+
+                setDetalhamento1(ids)
+                setMediaValores(idQuantidades);
+            }
+            if(selectValor1 === "nome") {
+                setQuantidadeSelecionado(false);
+                setQuantidadeSelecionadoGraf(false);
+                setTimeout(() => {setQuantidadeSelecionado(true), setQuantidadeSelecionadoGraf(true);}, 10);
+                setCampoDetalhamento1(produtos);
+                setCampoDetalhamento1Quantidade(produtoQuantidades);
+                setCampoDetalhamento1Total(totalQuantidadeProduto);
+
+                setDetalhamento1(produtos)
+                setMediaValores(produtoQuantidades);
+            }
             if(selectValor1 === "categoria") {
                 setQuantidadeSelecionado(false);
                 setQuantidadeSelecionadoGraf(false);
@@ -559,7 +879,7 @@ function Dados1() {
             }
             if(selectValor1 === "mes") {
                 // Obs: Tratamento dos meses de número para texto 
-                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
                 const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
                 setQuantidadeSelecionado(false);
                 setQuantidadeSelecionadoGraf(false);
@@ -572,8 +892,178 @@ function Dados1() {
                 setMediaValores(mesQuantidades);
             }
 
-            // 3 CAMPOS 
-            // CATEGORIA - Usar a função FiltroGrafico3 para adicionar a data e o name na tabela gráfica
+            // 3 CAMPOS - Usar a função FiltroGrafico3 para adicionar a data e o name na tabela gráfica 
+            // IDs
+            if(selectValor1 === "id" && selectValor2 === "nome") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionadoGraf3Campos(true);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(produtos)
+                setCampoDetalhamento2content(produtos);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'nome', 'id', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "id" && selectValor2 === "categoria") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionadoGraf3Campos(true);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(categorias)
+                setCampoDetalhamento2content(categorias);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'categoria', 'id', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "id" && selectValor2 === "fabricante") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionadoGraf3Campos(true);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(fabricantes)
+                setCampoDetalhamento2content(fabricantes);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'fabricante', 'id', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "id" && selectValor2 === "cor") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(cores)
+                setCampoDetalhamento2content(cores);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'cor', 'id', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "id" && selectValor2 === "ano") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(anos)
+                setCampoDetalhamento2content(anos);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'ano', 'id', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "id" && selectValor2 === "mes") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                // Obs: Tratamento dos meses de número para texto 
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+                const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
+                setCampoDetalhamento2title(mesesConvertidos)
+                setCampoDetalhamento2content(meses);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'mes', 'id', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            // PRODUTOS
+            if(selectValor1 === "nome" && selectValor2 === "id") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionadoGraf3Campos(true);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(ids)
+                setCampoDetalhamento2content(ids);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'id', 'nome', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "nome" && selectValor2 === "categoria") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionadoGraf3Campos(true);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(categorias)
+                setCampoDetalhamento2content(categorias);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'categoria', 'nome', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "nome" && selectValor2 === "fabricante") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionadoGraf3Campos(true);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(fabricantes)
+                setCampoDetalhamento2content(fabricantes);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'fabricante', 'nome', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "nome" && selectValor2 === "cor") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(cores)
+                setCampoDetalhamento2content(cores);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'cor', 'nome', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "nome" && selectValor2 === "ano") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(anos)
+                setCampoDetalhamento2content(anos);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'ano', 'nome', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "nome" && selectValor2 === "mes") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                // Obs: Tratamento dos meses de número para texto 
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+                const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
+                setCampoDetalhamento2title(mesesConvertidos)
+                setCampoDetalhamento2content(meses);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'mes', 'nome', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            // CATEGORIA
+            if(selectValor1 === "categoria" && selectValor2 === "id") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionadoGraf3Campos(true);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(ids)
+                setCampoDetalhamento2content(ids);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'id', 'categoria', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "categoria" && selectValor2 === "nome") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionadoGraf3Campos(true);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(produtos)
+                setCampoDetalhamento2content(produtos);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'nome', 'categoria', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
             if(selectValor1 === "categoria" && selectValor2 === "fabricante") {
                 setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
                 setQuantidadeSelecionadoGraf3Campos(true);
@@ -612,7 +1102,7 @@ function Dados1() {
                 setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
                 setQuantidadeSelecionado3Campos(true);
                 // Obs: Tratamento dos meses de número para texto 
-                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
                 const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
                 setCampoDetalhamento2title(mesesConvertidos)
                 setCampoDetalhamento2content(meses);
@@ -623,6 +1113,28 @@ function Dados1() {
             }
 
             // FABRICANTE
+            if(selectValor1 === "fabricante" && selectValor2 === "id") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(ids)
+                setCampoDetalhamento2content(ids);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'id', 'fabricante', 'quantidade')
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "fabricante" && selectValor2 === "nome") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(produtos)
+                setCampoDetalhamento2content(produtos);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'nome', 'fabricante', 'quantidade')
+                setSeriesGraf3(trat);
+            }
+
             if(selectValor1 === "fabricante" && selectValor2 === "categoria") {
                 setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
                 setQuantidadeSelecionado3Campos(true);
@@ -660,7 +1172,7 @@ function Dados1() {
                 setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
                 setQuantidadeSelecionado3Campos(true);
                 // Obs: Tratamento dos meses de número para texto 
-                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
                 const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
                 setCampoDetalhamento2title(mesesConvertidos)
                 setCampoDetalhamento2content(meses);
@@ -671,6 +1183,28 @@ function Dados1() {
             }
 
             // COR
+            if(selectValor1 === "cor" && selectValor2 === "id") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(ids)
+                setCampoDetalhamento2content(ids);
+                
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'id', 'cor', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "cor" && selectValor2 === "nome") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(produtos)
+                setCampoDetalhamento2content(produtos);
+                
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'nome', 'cor', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
             if(selectValor1 === "cor" && selectValor2 === "categoria") {
                 setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
                 setQuantidadeSelecionado3Campos(true);
@@ -708,7 +1242,7 @@ function Dados1() {
                 setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
                 setQuantidadeSelecionado3Campos(true);
                 // Obs: Tratamento dos meses de número para texto 
-                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
                 const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
                 setCampoDetalhamento2title(mesesConvertidos)
                 setCampoDetalhamento2content(meses);
@@ -719,6 +1253,28 @@ function Dados1() {
             }
 
             // ANO
+            if(selectValor1 === "ano" && selectValor2 === "id") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(ids)
+                setCampoDetalhamento2content(ids);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'id', 'ano', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "ano" && selectValor2 === "nome") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(produtos)
+                setCampoDetalhamento2content(produtos);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'nome', 'ano', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
             if(selectValor1 === "ano" && selectValor2 === "categoria") {
                 setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
                 setQuantidadeSelecionado3Campos(true);
@@ -756,7 +1312,7 @@ function Dados1() {
                 setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
                 setQuantidadeSelecionado3Campos(true);
                 // Obs: Tratamento dos meses de número para texto 
-                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"];
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
                 const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
                 setCampoDetalhamento2title(mesesConvertidos)
                 setCampoDetalhamento2content(meses);
@@ -767,6 +1323,28 @@ function Dados1() {
             }
 
             // MES
+            if(selectValor1 === "mes" && selectValor2 === "id") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(ids)
+                setCampoDetalhamento2content(ids);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'id', 'mes', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
+            if(selectValor1 === "mes" && selectValor2 === "nome") {
+                setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
+                setQuantidadeSelecionado3Campos(true);
+                setCampoDetalhamento2title(produtos)
+                setCampoDetalhamento2content(produtos);
+
+                setTimeout(() => {setQuantidadeSelecionadoGraf3Campos(true);}, 20);
+                const trat = FiltroGrafico3(dados1, 'nome', 'mes', 'quantidade');
+                setSeriesGraf3(trat);
+            }
+
             if(selectValor1 === "mes" && selectValor2 === "categoria") {
                 setTimeout(() => {setQuantidadeSelecionado(false), setQuantidadeSelecionadoGraf(false), setQuantidadeSelecionadoGraf3Campos(false);}, 10);
                 setQuantidadeSelecionado3Campos(true);
@@ -854,21 +1432,24 @@ function Dados1() {
         const tabela = detalhamento1.map(cat => {
         const linha = { propriedade: cat };
         detalhamento2.forEach(el => {
-        const items = dados1.filter(d => d[selectValor1] === cat && d[selectValor2] === el);
-        const soma = items.reduce((total, item) => total + item[selectValor0], 0);
+        const itens = dados1.filter(d => d[selectValor1] === cat && d[selectValor2] === el);
+        const soma = itens.reduce((total, item) => total + item[selectValor0], 0);
         linha[el] = soma;
         });
-        // Tratamento para os meses do eixo Y caso selecionar Mês no segundo campo, adaptar se necessário a outra fonte de dados. 
-        if(linha.propriedade === 1) {linha.propriedade = "Janeiro";}
-        if(linha.propriedade === 2) {linha.propriedade = "Fevereiro";}
-        if(linha.propriedade === 3) {linha.propriedade = "Março";}
-        if(linha.propriedade === 4) {linha.propriedade = "Abril";}
-        if(linha.propriedade === 5) {linha.propriedade = "Maio";}
-        if(linha.propriedade === 6) {linha.propriedade = "Junho";}
-        if(linha.propriedade === 7) {linha.propriedade = "Julho";}
-        if(linha.propriedade === 8) {linha.propriedade = "Agosto";}
-        if(linha.propriedade === 9) {linha.propriedade = "Setembro";}
-        if(linha.propriedade === 10) {linha.propriedade = "Outubro";}
+        // Tratamento para os meses do eixo Y caso selecionar Mês no segundo campo, adaptar se necessário a outra fonte de dados.
+        // Regra para ID caso conversão de mês de algum problema 
+        if(selectValor1 !== "id") {
+            if(linha.propriedade === 1) {linha.propriedade = "Janeiro";}
+            if(linha.propriedade === 2) {linha.propriedade = "Fevereiro";}
+            if(linha.propriedade === 3) {linha.propriedade = "Março";}
+            if(linha.propriedade === 4) {linha.propriedade = "Abril";}
+            if(linha.propriedade === 5) {linha.propriedade = "Maio";}
+            if(linha.propriedade === 6) {linha.propriedade = "Junho";}
+            if(linha.propriedade === 7) {linha.propriedade = "Julho";}
+            if(linha.propriedade === 8) {linha.propriedade = "Agosto";}
+            if(linha.propriedade === 9) {linha.propriedade = "Setembro";}
+            if(linha.propriedade === 10) {linha.propriedade = "Outubro";}
+        } 
         // Fim Tratamento para os meses do eixo Y caso selecionar Mês no segundo campo, adaptar se necessário a outra fonte de dados. 
         return linha;
     });

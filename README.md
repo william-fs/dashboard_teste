@@ -4,6 +4,8 @@
 - Adicionado Bootstrap padrão via CDN para auxilio de estilização dos inputs e tables
 - Adicionado Apexcharts via npm para criação das tabelas gráficas
 
+- Rodar npm install na pasta do projeto para baixar as dependências.
+
 Informações gerais para novos dados:
 
 Replicação e substituição de informações para a nova fonte de Dados, componete + fonte_de_dados_nova:
