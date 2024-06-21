@@ -163,8 +163,6 @@ const somarItemClitenteJ = clienteJFiltrado.reduce((total, item) => total + item
 export {somarValorTotalClitenteA, somarValorTotalClitenteB, somarValorTotalClitenteC, somarValorTotalClitenteD, somarValorTotalClitenteE, somarValorTotalClitenteF, somarValorTotalClitenteG, somarValorTotalClitenteH, somarValorTotalClitenteI, somarValorTotalClitenteJ};
 export {somarItemClitenteA, somarItemClitenteB, somarItemClitenteC, somarItemClitenteD, somarItemClitenteE, somarItemClitenteF, somarItemClitenteG, somarItemClitenteH, somarItemClitenteI, somarItemClitenteJ};
 
-export {}
-
 // Filtrar por Tipo de Categoria, Valor_total e Itens - 
 // Eletronicos 
 const categoriaEletFiltrado = dados2.filter(cat => cat.categoria === "Eletrônicos");
