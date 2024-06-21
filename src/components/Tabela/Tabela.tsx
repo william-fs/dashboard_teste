@@ -9,15 +9,17 @@ interface table {
 
 function Tabela({titleTable, contentTable, totalTable}:table) {
     return(
-        <table className="table table-bordered myTable">
-            <thead>
-                {titleTable}
-            </thead>
-            <tbody>
-                {contentTable}
-                {totalTable} 
-            </tbody>
-        </table>
+        <div className="tableStyle">
+            <table className="table table-bordered myTable">
+                <thead>
+                    {titleTable}
+                </thead>
+                <tbody>
+                    {contentTable}
+                    {totalTable} 
+                </tbody>
+            </table>
+        </div>
     )
 }
 export default Tabela;

@@ -1,9 +1,39 @@
-* {
-  background-color: rgb(243, 243, 243);
-}
-
 .app {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 30px;
+  height: 100vh;
+  background: rgb(255,255,255);
+background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(218,218,218,1) 100%);
+}
+
+.app h1 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.fadeTitle h1 {
+  text-align: center;
+  margin-left: 12px;
+}
+
+.fadeTitle, .fadeComboBox {
+  position: relative;
+  top: 30px;
+  opacity: 0;
+
+} 
+
+.fadeTitle._in, .fadeComboBox._in {
+  top: 0px;
+  opacity: 1;
+  transition: all 0.4s;
+}
+
+@media (max-width: 675.98px) {
+  .app {
+    display: block;
+  }
 }

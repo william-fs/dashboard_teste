@@ -1,6 +1,5 @@
 import Charts from '../Charts/Charts';
 import Charts3Campos from '../Charts3Campos/Charts3Campos';
-import './Dados1.css';
 import {useEffect, useState} from 'react';
 import Tabela from '../Tabela/Tabela';
 
@@ -1508,6 +1507,7 @@ function Dados1() {
             type: 'bar',
             height: 350,
             stacked: true,
+            background: "#ffffff",
             toolbar: {
                 show: true
             },
@@ -1561,38 +1561,64 @@ function Dados1() {
 
 
     return(
-        <div className='dados1'>
+        <div className='dados'>
 
-            <div className="camposFonte1">
-                <select value={selectValor0} onChange={(e) => handleOpt0(e.target.value)} className="form-select">
-                    <option value="nulo0">-</option>
-                    <option value="preco">Preço</option>
-                    <option value="quantidade">Quantidade</option>
-                </select>
+            <div className="selectionConfig">
 
-                <select value={selectValor1} onChange={(e) => handleOpt1(e.target.value)} className="form-select">
-                    <option value="nulo1">-</option>
-                    {
-                        valorFiltrado1.map((e, i) => (
-                            <option key={"select1"+i} value={e.valor}>{e.conteudo}</option>
-                        ))
-                    }
-                </select>
+                <div className="camposFonte">
+                    <div>
+                        <label htmlFor="selectD1_0">Somar</label>
+                        <select id='selectD1_0' value={selectValor0} onChange={(e) => handleOpt0(e.target.value)} className="form-select">
+                            <option value="nulo0">-</option>
+                            <option value="preco">Preço</option>
+                            <option value="quantidade">Quantidade</option>
+                        </select>
+                    </div>
 
-                <select value={selectValor2} onChange={(e) => handleOpt2(e.target.value)} className="form-select">
-                    <option value="nulo2">-</option>
-                    {
-                        valorFiltrado2.map((e, i) => (
-                            <option key={"select2"+i} value={e.valor}>{e.conteudo}</option>
-                        ))
-                    }
-                </select>
+                    <div>
+                        <label htmlFor="selectD1_1">Visualizar por</label>
+                        <select id='selectD1_1' value={selectValor1} onChange={(e) => handleOpt1(e.target.value)} className="form-select">
+                            <option value="nulo1">-</option>
+                            {
+                                valorFiltrado1.map((e, i) => (
+                                    <option key={"select1"+i} value={e.valor}>{e.conteudo}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label htmlFor="selectD1_2">Detalhar por</label>
+                        <select id='selectD1_2' value={selectValor2} onChange={(e) => handleOpt2(e.target.value)} className="form-select">
+                            <option value="nulo2">-</option>
+                            {
+                                valorFiltrado2.map((e, i) => (
+                                    <option key={"select2"+i} value={e.valor}>{e.conteudo}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                    
 
-                <div className="check">
-                    <input type="checkbox" id="tabela" name="tabela" value="tabela" checked={tabelaCheck} onChange={tabelaTF} />Tabela
-                    <input type="checkbox" id="grafico" name="grafico" value="grafico" checked={graficoCheck} onChange={graficoTF} />Gráfico
                 </div>
+                
+                <div className="checkBox">
+                    <div className="form-check">
+                            <input className='form-check-input' type="checkbox" id="tabela" name="tabela" value="tabela" checked={tabelaCheck} onChange={tabelaTF} />
+                            <label className="form-check-label" htmlFor="tabela">
+                                Tabela
+                            </label>
+                    </div>
+                    <div className="form-check">
+                        <input className='form-check-input' type="checkbox" id="grafico" name="grafico" value="grafico" checked={graficoCheck} onChange={graficoTF} />
+                        <label className="form-check-label" htmlFor="grafico">
+                            Gráfico
+                        </label>
+                    </div>
+                </div>
+                
             </div>
+
 
             {tabelaCheck && (
                 <div>

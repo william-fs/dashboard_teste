@@ -3,3 +3,66 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* Globais  */
+.dados {
+  display: flex;
+  flex-direction: column;
+}
+
+.selectionConfig {
+  display: flex;
+  align-items: end
+} 
+
+.camposFonte {
+  display: flex;
+}
+
+.camposFonte label {
+  margin-left: 17px;
+  cursor: default;
+  font-size: 14px;
+  color: #777777;
+}
+
+.dados select {
+  max-width: 180px;
+  margin: 10px;
+  cursor: pointer;
+  margin-top: 4px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.dados select option {
+  color: rgb(84, 84, 84);
+}
+
+.checkBox {
+  display: flex;
+  margin-left: 15px;
+  padding-bottom: 7px;
+}
+
+.checkBox .form-check {
+  padding: 0 20px;
+}
+
+input[type="checkbox"], label {
+  cursor: pointer;
+}
+
+@media (max-width: 675.98px) {
+  /* Combobox  */
+  .comboBox {
+    align-items: center;
+  }
+  /* checkbox select  */
+  .selectionConfig {
+    margin-bottom: 20px;
+    align-items: center;
+  }
+  .selectionConfig, .camposFonte {
+    flex-direction: column;
+  }
+}

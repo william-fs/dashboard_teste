@@ -1,9 +1,22 @@
+.tableStyle {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
 .myTable thead {
     font-weight: bold;
 }
 
-.myTable {
-    td {
-        width: 200px;
-    }
+.myTable td {
+    width: 200px;
 }
+

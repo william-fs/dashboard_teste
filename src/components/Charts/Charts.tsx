@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
+import "./Charts.css";
 
 interface ChartsProps {
     seriesM: number[][];
@@ -27,6 +28,7 @@ constructor(props: ChartsProps) {
             chart: {
                 height: 350,
                 type: 'bar',
+                background: "#ffffff"
             },
             plotOptions: {
                 bar: {
@@ -67,7 +69,6 @@ render() {
                 options={this.state.options}
                 series={this.state.series}
                 type="bar"
-                width="500"
                 />
             </div>
             </div>

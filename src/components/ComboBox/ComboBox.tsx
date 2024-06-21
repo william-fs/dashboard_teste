@@ -44,14 +44,17 @@ function ComboBox() {
 
     return(
         <div className="comboBox">
-            <select value={selecao} onChange={((e) => escolhaDados(e.target.value))} className={"form-select"}>
-                <option value="nulo">-</option>
-                <option value="dados1">Fonte de Dados 1</option>
-                <option value="dados2">Fonte de Dados 2</option>
-                <option value="dados3">Fonte de Dados 3</option>
-                <option value="dados4">Fonte de Dados 4</option>
-                <option value="dados5">Fonte de Dados 5</option>
-            </select>
+            <div>
+                <label className='comboBoxLabel' htmlFor="comboBox">Selecione a fonte de dados</label>
+                <select id='comboBox' value={selecao} onChange={((e) => escolhaDados(e.target.value))} className={"form-select"}>
+                    <option value="nulo">-</option>
+                    <option value="dados1">Fonte de Dados 1</option>
+                    <option value="dados2">Fonte de Dados 2</option>
+                    <option value="dados3">Fonte de Dados 3</option>
+                    <option value="dados4">Fonte de Dados 4</option>
+                    <option value="dados5">Fonte de Dados 5</option>
+                </select>
+            </div>
 
             <div>
                 {escolhaDados1 && (<Dados1 />)}
