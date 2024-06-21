@@ -184,7 +184,6 @@ function Dados1() {
             setQuantidadeSelecionadoGraf3Campos(false);
             setQuantidadeSelecionado3Campos(false);
         }
-        
         return;
     },[selectValor0, selectValor1, selectValor2, contentSelecionado0, contentSelecionado1, contentSelecionado2]);
 
@@ -289,6 +288,7 @@ function Dados1() {
                 setDetalhamento1(anos)
                 setMediaValores(anoPrecos);
             }
+            
             if(selectValor1 === "mes") {
                 // Obs: Tratamento dos meses de número para texto 
                 const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
@@ -302,9 +302,8 @@ function Dados1() {
 
                 setDetalhamento1(mesesConvertidos)
                 setMediaValores(mesPrecos);
-                return;
             }
-
+            
             // 3 CAMPOS -  Usar a função FiltroGrafico3 para adicionar a data e o name na tabela gráfica
             // ID's
             if(selectValor1 === "id" && selectValor2 === "nome") {
@@ -377,7 +376,7 @@ function Dados1() {
                 const trat = FiltroGrafico3(dados1, 'mes', 'id', "preco")
                 setSeriesGraf3(trat);
             }
-
+            
             // PRODUTOS
             if(selectValor1 === "nome" && selectValor2 === "id") {
                 setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
@@ -793,8 +792,11 @@ function Dados1() {
             if(selectValor1 === "mes" && selectValor2 === "ano") {
                 setTimeout(() => {setPrecoSelecionado(false), setPrecoSelecionadoGraf(false), setPrecoSelecionadoGraf3Campos(false);}, 10);
                 setPrecoSelecionado3Campos(true);
-                setCampoDetalhamento2title(anos)
-                setCampoDetalhamento2content(anos);
+                // Obs: Tratamento dos meses de número para texto 
+                const mesesStr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+                const mesesConvertidos = meses.map(numero => mesesStr[numero - 1]);
+                setCampoDetalhamento2title(mesesConvertidos)
+                setCampoDetalhamento2content(meses);
 
                 setTimeout(() => {setPrecoSelecionadoGraf3Campos(true);}, 20);
                 const trat = FiltroGrafico3(dados1, 'ano', 'mes', "preco");
@@ -1428,7 +1430,6 @@ function Dados1() {
     function gerarTabela() {
         const detalhamento1 = filtrarUnicos(selectValor1);
         const detalhamento2 = filtrarUnicos(selectValor2);
-    
         const tabela = detalhamento1.map(cat => {
         const linha = { propriedade: cat };
         detalhamento2.forEach(el => {

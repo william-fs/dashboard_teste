@@ -18,8 +18,8 @@ const produtos = Array.from(new Set(dados1.map(dado => dado.nome)));
 const categorias = Array.from(new Set(dados1.map(dado => dado.categoria)));
 const fabricantes = Array.from(new Set(dados1.map(dado => dado.fabricante)));
 const cores = Array.from(new Set(dados1.map(dado => dado.cor)));
-const anos:(number[] | string[]) = Array.from(new Set(dados1.map(dado => dado.ano)));
-const meses:(number[] | string[]) = Array.from(new Set(dados1.map(dado => dado.mes)));
+const anos = Array.from(new Set(dados1.map(dado => dado.ano)));
+const meses = Array.from(new Set(dados1.map(dado => dado.mes)));
 
 
 export {ids, produtos, categorias, fabricantes, cores, anos, meses};
