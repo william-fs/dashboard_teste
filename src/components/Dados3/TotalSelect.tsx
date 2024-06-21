@@ -4,23 +4,27 @@ import dados3 from "../../dados/fonte_de_dados_3.json";
 const valores = [
     {valor: "id", conteudo: "ID"},
     {valor: "nome", conteudo: "Nome"},
+    {valor: "departamento", conteudo: "Departamento"},
     {valor: "fabricante", conteudo: "Fabricante"},
     {valor: "cor", conteudo: "Cor"},
     {valor: "ano", conteudo: "Ano"},
-    {valor: "mes", conteudo: "Mês"}
+    {valor: "mes", conteudo: "Mês"},
+    {valor: "idade", conteudo: "Idade"},
 ]
 export {valores};
 
 // Filtro: conteúdo duplicados 
 const ids = Array.from(new Set(dados3.map(dado => dado.id)));
+const idades = Array.from(new Set(dados3.map(dado => dado.idade)));
 const nomes = Array.from(new Set(dados3.map(dado => dado.nome)));
+const departamentos = Array.from(new Set(dados3.map(dado => dado.departamento)));
 const fabricantes = Array.from(new Set(dados3.map(dado => dado.fabricante)));
 const cores = Array.from(new Set(dados3.map(dado => dado.cor)));
 const anos:(number[] | string[]) = Array.from(new Set(dados3.map(dado => dado.ano)));
 const meses:(number[] | string[]) = Array.from(new Set(dados3.map(dado => dado.mes)));
 
 
-export {ids, nomes, fabricantes, cores, anos, meses};
+export {ids, nomes, departamentos, fabricantes, cores, anos, meses, idades};
 
 // Filtrar por Tipo de dado para extrair os valores de soma - 
 // Filtrar por Tipo de Categoria, Preço e ID - 
@@ -68,6 +72,51 @@ const somarQuantidadeId10 = id10Filtrado.reduce((total, item) => total + item.an
 export {somarId1, somarId2, somarId3, somarId4, somarId5, somarId6, somarId7, somarId8, somarId9, somarId10};
 export {somarQuantidadeId1, somarQuantidadeId2, somarQuantidadeId3, somarQuantidadeId4, somarQuantidadeId5, somarQuantidadeId6, somarQuantidadeId7, somarQuantidadeId8, somarQuantidadeId9, somarQuantidadeId10};
 
+// Filtrar por Tipo de Idade, Preço e Produto - 
+// IDADE1
+const idade1Filtrado = dados3.filter(prod => prod.idade === 30);
+const somarPrecoIdade1 = Number(idade1Filtrado.reduce((total, item) => total + item.salario, 0).toFixed(2));
+const somarQuantidadeIdade1 = idade1Filtrado.reduce((total, item) => total + item.anos_experiencia, 0);
+// IDADE2
+const idade2Filtrado = dados3.filter(prod => prod.idade === 32);
+const somarPrecoIdade2 = Number(idade2Filtrado.reduce((total, item) => total + item.salario, 0).toFixed(2));
+const somarQuantidadeIdade2 = idade2Filtrado.reduce((total, item) => total + item.anos_experiencia, 0);
+// IDADE3
+const idade3Filtrado = dados3.filter(prod => prod.idade === 28);
+const somarPrecoIdade3 = Number(idade3Filtrado.reduce((total, item) => total + item.salario, 0).toFixed(2));
+const somarQuantidadeIdade3 = idade3Filtrado.reduce((total, item) => total + item.anos_experiencia, 0);
+// IDADE4
+const idade4Filtrado = dados3.filter(prod => prod.idade === 35);
+const somarPrecoIdade4 = Number(idade4Filtrado.reduce((total, item) => total + item.salario, 0).toFixed(2));
+const somarQuantidadeIdade4 = idade4Filtrado.reduce((total, item) => total + item.anos_experiencia, 0);
+// IDADE5
+const idade5Filtrado = dados3.filter(prod => prod.idade === 25);
+const somarPrecoIdade5 = Number(idade5Filtrado.reduce((total, item) => total + item.salario, 0).toFixed(2));
+const somarQuantidadeIdade5 = idade5Filtrado.reduce((total, item) => total + item.anos_experiencia, 0);
+// IDADE6
+const idade6Filtrado = dados3.filter(prod => prod.idade === 27);
+const somarPrecoIdade6 = Number(idade6Filtrado.reduce((total, item) => total + item.salario, 0).toFixed(2));
+const somarQuantidadeIdade6 = idade6Filtrado.reduce((total, item) => total + item.anos_experiencia, 0);
+// IDADE7
+const idade7Filtrado = dados3.filter(prod => prod.idade === 29);
+const somarPrecoIdade7 = Number(idade7Filtrado.reduce((total, item) => total + item.salario, 0).toFixed(2));
+const somarQuantidadeIdade7 = idade7Filtrado.reduce((total, item) => total + item.anos_experiencia, 0);
+// IDADE8
+const idade8Filtrado = dados3.filter(prod => prod.idade === 31);
+const somarPrecoIdade8 = Number(idade8Filtrado.reduce((total, item) => total + item.salario, 0).toFixed(2));
+const somarQuantidadeIdade8 = idade8Filtrado.reduce((total, item) => total + item.anos_experiencia, 0);
+// IDADE9
+const idade9Filtrado = dados3.filter(prod => prod.idade === 26);
+const somarPrecoIdade9 = Number(idade9Filtrado.reduce((total, item) => total + item.salario, 0).toFixed(2));
+const somarQuantidadeIdade9 = idade9Filtrado.reduce((total, item) => total + item.anos_experiencia, 0);
+// IDADE10
+const idade10Filtrado = dados3.filter(prod => prod.idade === 33);
+const somarPrecoIdade10 = Number(idade10Filtrado.reduce((total, item) => total + item.salario, 0).toFixed(2));
+const somarQuantidadeIdade10 = idade10Filtrado.reduce((total, item) => total + item.anos_experiencia, 0);
+
+export {somarPrecoIdade1, somarPrecoIdade2, somarPrecoIdade3, somarPrecoIdade4, somarPrecoIdade5, somarPrecoIdade6, somarPrecoIdade7, somarPrecoIdade8, somarPrecoIdade9, somarPrecoIdade10};
+export {somarQuantidadeIdade1, somarQuantidadeIdade2, somarQuantidadeIdade3, somarQuantidadeIdade4, somarQuantidadeIdade5, somarQuantidadeIdade6, somarQuantidadeIdade7, somarQuantidadeIdade8, somarQuantidadeIdade9, somarQuantidadeIdade10};
+
 // Filtrar por Tipo de Categoria, Preço e Produto - 
 // NOME 1
 const nome1Filtrado = dados3.filter(prod => prod.nome === "Alice");
@@ -112,6 +161,31 @@ const somarQuantidadeNome10 = nome10Filtrado.reduce((total, item) => total + ite
 
 export {somarPrecoNome1, somarPrecoNome2, somarPrecoNome3, somarPrecoNome4, somarPrecoNome5, somarPrecoNome6, somarPrecoNome7, somarPrecoNome8, somarPrecoNome9, somarPrecoNome10};
 export {somarQuantidadeNome1, somarQuantidadeNome2, somarQuantidadeNome3, somarQuantidadeNome4, somarQuantidadeNome5, somarQuantidadeNome6, somarQuantidadeNome7, somarQuantidadeNome8, somarQuantidadeNome9, somarQuantidadeNome10};
+
+// Filtrar por Tipo de Departamentos, Preço e Quantidade - 
+// DepartamentoVendas 
+const departamentoVendasFiltrado = dados3.filter(dep => dep.departamento === "Vendas");
+const somarPrecoDepartamentoVendas = Number(departamentoVendasFiltrado.reduce((total, item) => total + item.salario, 0).toFixed(2));
+const somarQuantidadeDepartamentoVendas = departamentoVendasFiltrado.reduce((total, item) => total + item.anos_experiencia, 0);
+// DepartamentoTi 
+const departamentoTiFiltrado = dados3.filter(dep => dep.departamento === "TI");
+const somarPrecoDepartamentoTi = Number(departamentoTiFiltrado.reduce((total, item) => total + item.salario, 0).toFixed(2));
+const somarQuantidadeDepartamentoTi = departamentoTiFiltrado.reduce((total, item) => total + item.anos_experiencia, 0);
+// DepartamentoMkt
+const departamentoMktFiltrado = dados3.filter(dep => dep.departamento === "Marketing");
+const somarPrecoDepartamentoMkt = Number(departamentoMktFiltrado.reduce((total, item) => total + item.salario, 0).toFixed(2));
+const somarQuantidadeDepartamentoMkt = departamentoMktFiltrado.reduce((total, item) => total + item.anos_experiencia, 0);
+// DepartamentoRh
+const departamentoRhFiltrado = dados3.filter(dep => dep.departamento === "RH");
+const somarPrecoDepartamentoRh = Number(departamentoRhFiltrado.reduce((total, item) => total + item.salario, 0).toFixed(2));
+const somarQuantidadeDepartamentoRh = departamentoRhFiltrado.reduce((total, item) => total + item.anos_experiencia, 0);
+// DepartamentoAdm
+const departamentoAdmFiltrado = dados3.filter(dep => dep.departamento === "Administração");
+const somarPrecoDepartamentoAdm = Number(departamentoAdmFiltrado.reduce((total, item) => total + item.salario, 0).toFixed(2));
+const somarQuantidadeDepartamentoAdm = departamentoAdmFiltrado.reduce((total, item) => total + item.anos_experiencia, 0);
+
+export {somarPrecoDepartamentoVendas, somarPrecoDepartamentoTi, somarPrecoDepartamentoMkt, somarPrecoDepartamentoRh, somarPrecoDepartamentoAdm};
+export {somarQuantidadeDepartamentoVendas, somarQuantidadeDepartamentoTi, somarQuantidadeDepartamentoMkt, somarQuantidadeDepartamentoRh, somarQuantidadeDepartamentoAdm};
 
 // Filtrar por Tipo de Fabricante, Preço e Quantidade - 
 // Fabricante X 
