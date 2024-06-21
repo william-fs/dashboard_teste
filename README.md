@@ -35,4 +35,7 @@ Obs: os set's se referem as importações do arquivo TotalSelect.tsx com o array
 -- o "Chart" é tratado via props e todas as opções no próprio componente.
 -- O ""Chart3Campos" tem as opções tratadas no componente principal de cada Dado, pois a informação do tem aspectos mais complexos não permitindo fazer via props.
 
-
+Informações para build:
+Substituído o valor padrão do vite no package.json em função de erros que podem acontecer no compilador.
+default: "build": "tsc && vite build"
+modificado: "build": "vite build --base=./"
