@@ -1,4 +1,5 @@
 .app {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,6 +35,9 @@ background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(218,218,218,1) 10
 
 @media (max-width: 675.98px) {
   .app {
-    display: block;
+    width: fit-content;
+    min-width: 675px;
+    transform: scale(0.7); /* Ajuste a escala conforme necessário */
+    transform-origin: top left; /* Ajusta a origem da transformação para o canto superior esquerdo */
   }
 }
